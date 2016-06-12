@@ -15,6 +15,7 @@ const $ = global.$ = new ProjectCore();
 $.createDebug = function (name) {
   return createDebug('my:' + name);
 };
+
 const debug = $.createDebug('server');
 
 //import config.js
@@ -29,17 +30,34 @@ $.init.add((done) => {
     done();
 });
 
+//Init Mongodb
+$.init.load(path.resolve(__dirname, 'init', 'mongodb.js'));
+
+// Import models
+$.init.load(path.resolve(__dirname, 'models'));
+
+//  Init Express
+$.init.load(path.resolve(__dirname, 'init', 'express.js'));
+
+// Import route
+$.init.load(path.resolve(__dirname, 'routes'));
+
 // Init
 $.init((err) => {
   if (err) {
     console.error(err);
     process.exit(-1);
   } else {
-    console.log('inited [env=$s]', $.env);
+    console.log('inited [env=%s]', $.env);
   }
 
-$.init.load(path.resolve(__dirname, 'init', 'mongodb.js'));
-$.init.load(path.resolve(__dirname, 'models'));
-$.init.load(path.resolve(__dirname, 'init', 'express.js'));
-$.init.load(path.resolve(__dirname, 'route', 'route.js'));
+/* DB Test
+  const item = new $.model.User({
+    name: `User${$.utils.date('Ymd')}`,
+    password: '123456',
+    nickname: 'Test User',
+  });
+  item.save(console.log);
+*/
+
 });
