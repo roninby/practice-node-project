@@ -36,6 +36,9 @@ $.init.load(path.resolve(__dirname, 'init', 'mongodb.js'));
 // Import models
 $.init.load(path.resolve(__dirname, 'models'));
 
+//Import methods
+$.init.load(path.resolve(__dirname, 'methods'));
+
 //  Init Express
 $.init.load(path.resolve(__dirname, 'init', 'express.js'));
 
@@ -50,6 +53,8 @@ $.init((err) => {
   } else {
     console.log('inited [env=%s]', $.env);
   }
+
+  require('./test');
 
 /* DB Test
   const item = new $.model.User({
