@@ -42,6 +42,9 @@ $.init.load(path.resolve(__dirname, 'methods'));
 //  Init Express
 $.init.load(path.resolve(__dirname, 'init', 'express.js'));
 
+// Import middleware
+$.init.load(path.resolve(__dirname, 'middlewares'));
+
 // Import route
 $.init.load(path.resolve(__dirname, 'routes'));
 
@@ -54,7 +57,7 @@ $.init((err) => {
     console.log('inited [env=%s]', $.env);
   }
 
-  require('./test');
+//  require('./test');
 
 /* DB Test
   const item = new $.model.User({
